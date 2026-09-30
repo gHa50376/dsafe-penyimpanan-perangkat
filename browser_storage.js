@@ -29,6 +29,70 @@ async function execute(request){
   tx.onerror=()=>reject(tx.error||new Error('Tidak dapat menyimpan data di perangkat.'));
  });
 }
+
+// DSAFE_NAVIGATION_BRIDGE_V1
+// Streamlit Community Cloud: force the existing HTML navigation
+// controls to navigate on the top-level application page.
+function installDsafeNavigationBridge(){
+  const stateKey = Symbol.for('dsafe.v364113.navigation-bridge');
+
+  if(globalThis[stateKey]) return;
+  globalThis[stateKey] = true;
+
+  const selector = [
+    'a.home-card-shell',
+    'a.settings-float',
+    'a.bk-hist-action-btn',
+    'a.dk70-week-arrow'
+  ].join(',');
+
+  const handleNavigation = (event) => {
+    let anchor = null;
+
+    if(typeof event.composedPath === 'function'){
+      for(const node of event.composedPath()){
+        if(
+          node &&
+          typeof node.matches === 'function' &&
+          node.matches(selector)
+        ){
+          anchor = node;
+          break;
+        }
+      }
+    }
+
+    if(
+      !anchor &&
+      event.target &&
+      typeof event.target.closest === 'function'
+    ){
+      anchor = event.target.closest(selector);
+    }
+
+    if(!anchor) return;
+
+    const href = anchor.getAttribute('href');
+
+    if(!href || !href.includes('nav=')) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if(typeof event.stopImmediatePropagation === 'function'){
+      event.stopImmediatePropagation();
+    }
+
+    const destination = new URL(href, globalThis.location.href);
+
+    globalThis.location.assign(destination.href);
+  };
+
+  document.addEventListener('click', handleNavigation, true);
+}
+
+installDsafeNavigationBridge();
+
 export default function({data,parentElement,setStateValue}){
  // Hide only the storage bridge's wrapper, leaving the original application layout intact.
  parentElement.closest('[data-testid="stElementContainer"]')?.style.setProperty('display','none');
