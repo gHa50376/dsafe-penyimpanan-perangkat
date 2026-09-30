@@ -1,0 +1,66 @@
+name: Fix Streamlit Online Navigation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/fix-online-navigation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-navigation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fix online navigation links
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path("app.py")
+          text = path.read_text(encoding="utf-8")
+
+          pattern = re.compile(r'(?<!/)\?nav=')
+          matches = pattern.findall(text)
+
+          if not matches:
+              print("Navigation links are already patched.")
+              raise SystemExit(0)
+
+          if len(matches) != 9:
+              raise SystemExit(
+                  f"Safety check failed: expected 9 navigation links, found {len(matches)}."
+              )
+
+          text, changed = pattern.subn('/?nav=', text)
+          path.write_text(text, encoding="utf-8")
+
+          print(f"Updated {changed} navigation links.")
+          PY
+
+      - name: Commit navigation fix
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add app.py
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Fix Streamlit online navigation"
+          git push
