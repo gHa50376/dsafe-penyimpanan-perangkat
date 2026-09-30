@@ -1,0 +1,62 @@
+name: Unpack D-Safe V36.4.113
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/unpack-dsafe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract D-Safe V36.4.113
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ZIP="dsafe-v36.4.113-online-penyimpanan-perangkat.zip"
+          DEST="/tmp/dsafe-unpack"
+
+          test -f "$ZIP"
+
+          rm -rf "$DEST"
+          mkdir -p "$DEST"
+
+          unzip -q "$ZIP" -d "$DEST"
+
+          SRC="$DEST/dsafe-v36.4.113-online"
+
+          test -f "$SRC/app.py"
+          test -f "$SRC/requirements.txt"
+          test -d "$SRC/static"
+          test -d "$SRC/templates"
+
+          cp -a "$SRC"/. .
+
+      - name: Commit extracted project
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Extract D-Safe V36.4.113"
+          git push
