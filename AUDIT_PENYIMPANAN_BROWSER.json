@@ -1,0 +1,11 @@
+{
+  "baseline": "V36.4.113 FINAL",
+  "non_storage_code_identical": true,
+  "unchanged_original_files": 122,
+  "user_data_files_written_to_host": false,
+  "storage_changes": [
+    "browser_storage.py",
+    "browser_storage.js",
+    "book load/save, browser paths, synchronization and reset transport preservation"
+  ]
+}

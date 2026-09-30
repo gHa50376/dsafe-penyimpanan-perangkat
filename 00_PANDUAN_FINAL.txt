@@ -1,0 +1,59 @@
+﻿D-SAFE — PANDUAN FINAL V36.4.113
+Tanggal finalisasi: 30 September 2026
+
+1. MENJALANKAN DI KOMPUTER
+Ekstrak seluruh ZIP ke folder baru. Jangan menjalankan dari dalam ZIP.
+Klik dua kali Jalankan_D-Safe_Windows.bat.
+Biarkan jendela peluncur terbuka selama aplikasi digunakan.
+Buka http://localhost:8501 pada browser komputer.
+Jika paket Python belum siap, buka Command Prompt di folder aplikasi,
+jalankan python -m pip install -r requirements.txt, lalu jalankan peluncur lagi.
+Paket ini berisi kode, template, dan aset aplikasi; Python serta dependensi
+harus tersedia pada komputer. Instalasi dependensi memerlukan internet.
+
+2. MEMBUKA DARI HP
+Hubungkan komputer dan HP ke Wi-Fi yang sama.
+Lihat IPv4 Wi-Fi komputer yang ditampilkan oleh peluncur.
+Di browser HP buka http://ALAMAT-IPv4-KOMPUTER:8501.
+Contoh: jika IPv4 adalah 192.168.1.10, buka http://192.168.1.10:8501.
+Gunakan alamat komputer, bukan localhost atau 0.0.0.0 pada HP.
+Jika Windows meminta izin firewall Python, izinkan pada jaringan Privat.
+Komputer harus tetap menyala dan peluncur tetap terbuka.
+
+3. ALUR PENGGUNAAN
+Isi identitas stasiun dan daftar petugas melalui Pengaturan sesuai kebutuhan.
+Masukkan kegiatan melalui Buku Kerja, kemudian Simpan Kegiatan.
+Periksa riwayat; gunakan Edit/Hapus jika diperlukan.
+Pilih periode dan gunakan preview/cetak Buku Kerja untuk menyimpan PDF.
+Untuk D-Safe, pilih bulan/tahun, periksa data, lalu Generate PPT.
+Untuk Safety Talk Mingguan, pilih rentang tanggal, periksa data, lalu Generate PPT.
+Buka hasil unduhan untuk memeriksa tanggal, teks, dan dokumentasi.
+
+4. CADANGAN DATA
+Buka Pengaturan, lalu Cadangan Data.
+Pilih filter Tanggal (rentang), Bulan, atau Tahun.
+Periksa jumlah kegiatan yang akan dipindahkan dan yang tetap di aplikasi.
+Tekan Reset dan Cadangkan untuk mengunduh ZIP.
+Tunggu hingga file tersimpan. Dialog reset memerlukan konfirmasi tersendiri;
+jika hanya ingin menyimpan cadangan, batalkan reset pada dialog tersebut.
+Simpan ZIP di lokasi yang mudah ditemukan dan simpan salinannya secara terpisah.
+
+5. PEMULIHAN DATA
+Buka Pengaturan dan pilih Pulihkan Cadangan.
+Pilih ZIP cadangan dari Unduhan/Downloads; tidak perlu mengekstrak ZIP cadangan.
+Periksa ringkasan dan peringatan pada dialog sebelum mengonfirmasi.
+Cadangan penuh dapat mengganti data saat ini; ikuti keterangan cakupan pada dialog.
+Setelah pemulihan, periksa kegiatan, foto, tanda tangan, dan periode.
+
+6. MENGGUNAKAN PAKET FINAL
+Paket final tetap menggunakan aplikasi V36.4.113 yang telah diuji.
+Paket baru dimulai dengan data kosong dan tidak menyalin data versi lama otomatis.
+Jika folder V36.4.113 yang sekarang sudah berjalan baik, folder itu tetap dapat
+Anda gunakan. Bila beralih ke folder hasil ekstraksi paket final, buat cadangan
+dari folder yang digunakan sekarang, kemudian pulihkan di folder baru.
+Jangan menghapus folder kerja lama sebelum data pada folder baru diperiksa.
+
+7. PENYIMPANAN DAN PENUTUPAN
+Data tersimpan pada folder aplikasi di komputer yang menjalankan server.
+HP mengakses aplikasi yang sama melalui jaringan, bukan menyimpan server terpisah.
+Tutup jendela peluncur untuk menghentikan aplikasi.

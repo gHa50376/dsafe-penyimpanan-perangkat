@@ -1,0 +1,52 @@
+D-SAFE V36.4.113 — ONLINE DENGAN PENYIMPANAN PERANGKAT
+
+Paket ini memakai antarmuka Streamlit, formulir, dashboard, dan fungsi laporan
+V36.4.113 yang sama. Hanya akses penyimpanan Buku Kerja, draf, dan cadangan lokal
+aplikasi yang diganti dengan IndexedDB browser masing-masing pengguna.
+
+STATUS
+Paket koreksi siap untuk pemasangan pada hosting Streamlit. Paket ini belum
+menggantikan situs PWA awal yang memiliki tampilan berbeda. Bukan aplikasi
+offline. Komputer pengguna tidak harus menyala bila server hosting tersedia.
+
+MENJALANKAN UNTUK UJI
+1. Ekstrak ke folder baru, terpisah dari V36.4.113 FINAL.
+2. Pasang paket: python -m pip install -r requirements.txt
+3. Jalankan Jalankan_D-Safe_Windows.bat yang sudah ada.
+4. Akses dari komputer/HP seperti panduan V36.4.113.
+Browser baru akan mulai dengan data kegiatan kosong; tidak membaca data versi
+lama dari folder komputer. Data yang pernah disimpan akan dimuat dari browser
+pada alamat aplikasi yang sama.
+
+PEMASANGAN STREAMLIT COMMUNITY CLOUD
+1. Gunakan repositori atau cabang terpisah supaya versi FINAL tetap tersimpan.
+2. Unggah isi paket sehingga app.py, browser_storage.py, browser_storage.js,
+   requirements.txt, packages.txt, static/, dan templates/ berada di akar repo.
+3. Buka https://share.streamlit.io dan masuk menggunakan akun GitHub.
+4. Pilih Create app, repositori/cabang tersebut, serta main file path app.py.
+5. Pilih Python 3.13 jika tersedia, sesuai lingkungan versi final pengguna.
+6. Setelah Deploy selesai, buka alamat aplikasi baru langsung di browser HP.
+7. Uji simpan, buka ulang, foto, tanda tangan, cadangan/pemulihan, dan laporan.
+
+DATA
+Data tahan lama disimpan di browser pada origin/alamat aplikasi tersebut.
+Selama dipakai, server menerima salinan sesi untuk menjalankan Streamlit dan
+membuat laporan. Salinan ini tidak disimpan ke berkas Buku Kerja/draf permanen
+pada server. Pembuatan preview dapat menggunakan berkas sementara seperti pada
+kode asli, dengan pembersihan yang sama.
+
+Tab/perangkat lain tidak otomatis bersinkron. Konflik antar-tab menghentikan
+penyimpanan agar data lama tidak menimpa data yang lebih baru. Jika browser
+menolak penyimpanan atau kuotanya habis, aplikasi menampilkan kegagalan dan
+menawarkan unduhan cadangan data yang belum tersimpan. Jangan tutup tab sebelum
+proses penyimpanan selesai.
+
+Browser berbeda, perangkat berbeda, atau alamat hosting berbeda mempunyai data
+terpisah. Menghapus data browser akan menghapus kegiatan. Gunakan Cadangan dan
+Pulihkan Cadangan untuk memindahkan data. Tidak ada perubahan format ZIP/JSON
+cadangan yang dipakai versi final.
+
+BATAS PEMERIKSAAN
+Pemeriksaan kode/berkas, Streamlit AppTest, dan simulasi IndexedDB telah dilakukan.
+Pengujian end-to-end pada hosting dan browser HP nyata masih perlu dilakukan
+setelah pemasangan. Paket ini tidak menyediakan service worker/offline penuh.

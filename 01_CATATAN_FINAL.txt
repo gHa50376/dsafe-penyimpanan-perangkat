@@ -1,0 +1,32 @@
+﻿D-SAFE — CATATAN FINAL V36.4.113
+Tanggal: 30 September 2026
+
+Dasar rilis: dsafe-ppt-generator-v36.4.113.zip.
+Status: versi stabil berdasarkan konfirmasi pengujian pengguna dalam percakapan.
+
+Hasil yang dikonfirmasi pengguna:
+- Akses aplikasi dari HP berhasil.
+- Input kegiatan, preview, dan download berjalan baik.
+- Unduh ZIP cadangan berhasil.
+- Uji cadangan dan pemulihan dinyatakan baik.
+- Hasil D-Safe dan Safety Talk Mingguan dinyatakan baik setelah arahan uji
+  kelengkapan kegiatan, tanggal, teks, foto, dan penggabungan CCTV.
+- Cetak/PDF Buku Kerja dinyatakan baik setelah arahan uji foto, tanda tangan,
+  nomor urut, header, dan empat kegiatan per halaman.
+
+Perubahan paket final:
+- Menambahkan 00_PANDUAN_FINAL.txt.
+- Menambahkan 01_CATATAN_FINAL.txt.
+- Kode aplikasi, peluncur Windows, dependensi, template, aset, dan dokumen
+  sebelumnya dipertahankan persis dari arsip V36.4.113.
+- Nomor versi aplikasi tetap V36.4.113; FINAL adalah penanda paket distribusi.
+
+Pemeriksaan pengemasan:
+- Arsip sumber dan arsip final lolos pemeriksaan CRC ZIP.
+- Seluruh berkas asli identik byte demi byte dengan arsip sumber.
+- Seluruh berkas Python lolos pemeriksaan sintaks AST.
+
+Batas validasi:
+Catatan pengujian penggunaan bersumber dari laporan pengguna, bukan pengujian
+ulang pada perangkat HP/Windows oleh penyusun paket final. Pengemasan ini tidak
+menambahkan klaim pengujian seluruh variasi kegiatan atau seluruh perangkat.
