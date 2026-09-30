@@ -6377,25 +6377,233 @@ if nav == 'Beranda':
         }
         </style>
         """,unsafe_allow_html=True)
+
     home_data=load_book_data()
     home_profile=home_data.get('user_profile') or {}
     home_station=html.escape(home_data.get('station') or 'Belum diisi')
     home_user=html.escape(home_profile.get('name') or 'Belum diisi')
     home_nipp=html.escape(str(home_profile.get('nipp') or '').strip())
     home_nipp_line=f'<span class="hero-nipp">NIPP. {home_nipp}</span>' if home_nipp else ''
+
+    st.markdown("""
+    <style>
+    .st-key-home_native_grid_v114{
+      margin-top:7px !important;
+    }
+
+    .st-key-home_native_grid_v114 > div[data-testid="stVerticalBlock"]{
+      gap:6px !important;
+    }
+
+    .st-key-home_native_book_v114,
+    .st-key-home_native_dashboard_v114,
+    .st-key-home_native_dsafe_v114,
+    .st-key-home_native_safety_v114{
+      position:relative !important;
+      width:100% !important;
+      min-width:0 !important;
+      margin:0 !important;
+      padding:0 !important;
+    }
+
+    .st-key-home_native_book_v114 > div[data-testid="stVerticalBlock"],
+    .st-key-home_native_dashboard_v114 > div[data-testid="stVerticalBlock"],
+    .st-key-home_native_dsafe_v114 > div[data-testid="stVerticalBlock"],
+    .st-key-home_native_safety_v114 > div[data-testid="stVerticalBlock"]{
+      gap:0 !important;
+    }
+
+    .st-key-home_native_book_click_v114,
+    .st-key-home_native_dashboard_click_v114,
+    .st-key-home_native_dsafe_click_v114,
+    .st-key-home_native_safety_click_v114{
+      position:absolute !important;
+      inset:0 !important;
+      z-index:2147482000 !important;
+      width:100% !important;
+      height:100% !important;
+      margin:0 !important;
+      padding:0 !important;
+    }
+
+    .st-key-home_native_book_click_v114 button,
+    .st-key-home_native_dashboard_click_v114 button,
+    .st-key-home_native_dsafe_click_v114 button,
+    .st-key-home_native_safety_click_v114 button{
+      position:absolute !important;
+      inset:0 !important;
+      width:100% !important;
+      height:100% !important;
+      min-height:100% !important;
+      margin:0 !important;
+      padding:0 !important;
+      border:0 !important;
+      background:transparent !important;
+      box-shadow:none !important;
+      opacity:0 !important;
+      cursor:pointer !important;
+    }
+
+    .st-key-home_native_book_v114:hover .home-card-shell,
+    .st-key-home_native_dashboard_v114:hover .home-card-shell,
+    .st-key-home_native_dsafe_v114:hover .home-card-shell,
+    .st-key-home_native_safety_v114:hover .home-card-shell{
+      transform:translateY(-3px) scale(1.012) !important;
+      box-shadow:0 12px 24px rgba(30,86,132,.20),
+                 0 0 0 2px rgba(20,112,216,.18) !important;
+      border-color:#8fc8f4 !important;
+    }
+
+    .st-key-home_native_settings_click_v114{
+      position:fixed !important;
+      right:22px !important;
+      bottom:22px !important;
+      width:46px !important;
+      height:46px !important;
+      z-index:2147483646 !important;
+      margin:0 !important;
+      padding:0 !important;
+    }
+
+    .st-key-home_native_settings_click_v114 button{
+      position:absolute !important;
+      inset:0 !important;
+      width:100% !important;
+      height:100% !important;
+      min-height:100% !important;
+      margin:0 !important;
+      padding:0 !important;
+      border:0 !important;
+      background:transparent !important;
+      box-shadow:none !important;
+      opacity:0 !important;
+      cursor:pointer !important;
+    }
+
+    @media(max-width:760px){
+      .st-key-home_native_settings_click_v114{
+        right:12px !important;
+        bottom:12px !important;
+        width:40px !important;
+        height:40px !important;
+      }
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     st.markdown(f"""
     <div class='home-shell'>
-      <div class='home-hero'><div class='hero-copy'><h1 class='hero-title'>PERFORMANCE MONITORING &amp; REPORTING</h1><p class='hero-subtitle'>Platform untuk mendukung kegiatan keselamatan kerja dan pengelolaan laporan secara efisien.</p><div class='hero-identity'><strong class='hero-station'>{home_station}</strong><span class='hero-user'>{home_user}</span>{home_nipp_line}</div></div></div>
-      <div class='home-grid'>
-        <a class='home-card-shell book-card' href='/?nav=Buku%20Kerja' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Buku Kerja</div><div class='home-card-copy'>Input kegiatan, petugas, TTD, dokumentasi, riwayat, dan PDF.</div></div></a>
-        <a class='home-card-shell monitor-card' href='/?nav=Dashboard%20Kinerja' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Dashboard Kinerja</div><div class='home-card-copy'>Rekap minggu, bulan, tahun, dan capaian target tiap petugas.</div></div></a>
-        <a class='home-card-shell dsafe-card' href='/?nav=D-Safe' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>D-Safe</div><div class='home-card-copy'>Generator laporan D-Safe.</div></div></a>
-        <a class='home-card-shell safety-card' href='/?nav=Safety%20Talk' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Safety Talk Mingguan</div><div class='home-card-copy'>Generator laporan Safety Talk.</div></div></a>
+      <div class='home-hero'>
+        <div class='hero-copy'>
+          <h1 class='hero-title'>PERFORMANCE MONITORING &amp; REPORTING</h1>
+          <p class='hero-subtitle'>Platform untuk mendukung kegiatan keselamatan kerja dan pengelolaan laporan secara efisien.</p>
+          <div class='hero-identity'>
+            <strong class='hero-station'>{home_station}</strong>
+            <span class='hero-user'>{home_user}</span>
+            {home_nipp_line}
+          </div>
+        </div>
       </div>
-      <a class='settings-float' href='/?nav=Pengaturan' target='_top' aria-label='Pengaturan'>⚙</a>
     </div>
-    <div class='home-footer'><div class='kai-brand'><span class='kai-logo'><span class='kai-k'>K</span><span class='kai-a'>A</span><span class='kai-i'>I</span></span><span>PT. Kereta Api Indonesia (Persero)</span></div><div class='footer-tag'>Safe Today&nbsp;&nbsp;|&nbsp;&nbsp;Better Tomorrow</div></div>
     """, unsafe_allow_html=True)
+
+    with st.container(key='home_native_grid_v114'):
+
+        with st.container(key='home_native_book_v114'):
+            st.markdown(
+                "<div class='home-card-shell book-card'>"
+                "<div class='home-card-image'></div>"
+                "<div class='home-card-body'>"
+                "<div class='home-card-title'>Buku Kerja</div>"
+                "<div class='home-card-copy'>Input kegiatan, petugas, TTD, dokumentasi, riwayat, dan PDF.</div>"
+                "</div></div>",
+                unsafe_allow_html=True
+            )
+            st.button(
+                'Buku Kerja',
+                key='home_native_book_click_v114',
+                on_click=_navigate_v36458,
+                args=('Buku Kerja',)
+            )
+
+        with st.container(key='home_native_dashboard_v114'):
+            st.markdown(
+                "<div class='home-card-shell monitor-card'>"
+                "<div class='home-card-image'></div>"
+                "<div class='home-card-body'>"
+                "<div class='home-card-title'>Dashboard Kinerja</div>"
+                "<div class='home-card-copy'>Rekap minggu, bulan, tahun, dan capaian target tiap petugas.</div>"
+                "</div></div>",
+                unsafe_allow_html=True
+            )
+            st.button(
+                'Dashboard Kinerja',
+                key='home_native_dashboard_click_v114',
+                on_click=_navigate_v36458,
+                args=('Dashboard Kinerja',)
+            )
+
+        with st.container(key='home_native_dsafe_v114'):
+            st.markdown(
+                "<div class='home-card-shell dsafe-card'>"
+                "<div class='home-card-image'></div>"
+                "<div class='home-card-body'>"
+                "<div class='home-card-title'>D-Safe</div>"
+                "<div class='home-card-copy'>Generator laporan D-Safe.</div>"
+                "</div></div>",
+                unsafe_allow_html=True
+            )
+            st.button(
+                'D-Safe',
+                key='home_native_dsafe_click_v114',
+                on_click=_navigate_v36458,
+                args=('D-Safe',)
+            )
+
+        with st.container(key='home_native_safety_v114'):
+            st.markdown(
+                "<div class='home-card-shell safety-card'>"
+                "<div class='home-card-image'></div>"
+                "<div class='home-card-body'>"
+                "<div class='home-card-title'>Safety Talk Mingguan</div>"
+                "<div class='home-card-copy'>Generator laporan Safety Talk.</div>"
+                "</div></div>",
+                unsafe_allow_html=True
+            )
+            st.button(
+                'Safety Talk Mingguan',
+                key='home_native_safety_click_v114',
+                on_click=_navigate_v36458,
+                args=('Safety Talk',)
+            )
+
+    st.markdown(
+        "<div class='settings-float' aria-hidden='true'>⚙</div>",
+        unsafe_allow_html=True
+    )
+
+    st.button(
+        'Pengaturan',
+        key='home_native_settings_click_v114',
+        on_click=_navigate_v36458,
+        args=('Pengaturan',)
+    )
+
+    st.markdown(
+        "<div class='home-footer'>"
+        "<div class='kai-brand'>"
+        "<span class='kai-logo'>"
+        "<span class='kai-k'>K</span>"
+        "<span class='kai-a'>A</span>"
+        "<span class='kai-i'>I</span>"
+        "</span>"
+        "<span>PT. Kereta Api Indonesia (Persero)</span>"
+        "</div>"
+        "<div class='footer-tag'>Safe Today&nbsp;&nbsp;|&nbsp;&nbsp;Better Tomorrow</div>"
+        "</div>",
+        unsafe_allow_html=True
+    )
+
     browser_store.stop()
 
 st.button('⌂',key='nav_home_v58',on_click=_navigate_v36458,args=('Beranda',))
