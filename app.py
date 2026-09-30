@@ -5499,8 +5499,8 @@ def render_buku_kerja_v341():
             delete_key=hashlib.sha1(str(sid).encode('utf-8')).hexdigest()[:12]
             return (
                 f'<div class="bk-hist-action" style="display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;margin-left:6px;">'
-                f'<a href="?nav=Buku%20Kerja&bk_edit={sid_q}" target="_top" aria-label="Edit kegiatan ini" class="bk-hist-action-btn" style="text-decoration:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;font-size:15px;">✏️</a>'
-                f'<a href="?nav=Buku%20Kerja&bk_delete={sid_q}" target="_top" data-bk-delete-key="{delete_key}" aria-label="Hapus kegiatan ini" class="bk-hist-action-btn" style="text-decoration:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #fecaca;border-radius:8px;background:#fff1f2;font-size:15px;">🗑️</a>'
+                f'<a href="/?nav=Buku%20Kerja&bk_edit={sid_q}" target="_top" aria-label="Edit kegiatan ini" class="bk-hist-action-btn" style="text-decoration:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;font-size:15px;">✏️</a>'
+                f'<a href="/?nav=Buku%20Kerja&bk_delete={sid_q}" target="_top" data-bk-delete-key="{delete_key}" aria-label="Hapus kegiatan ini" class="bk-hist-action-btn" style="text-decoration:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #fecaca;border-radius:8px;background:#fff1f2;font-size:15px;">🗑️</a>'
                 f'</div>'
             )
 
@@ -5775,8 +5775,8 @@ def render_dashboard_kinerja_v341():
         except (ValueError,TypeError):week_offset=0
         start=today-timedelta(days=today.weekday())+timedelta(weeks=week_offset)
         end=start+timedelta(days=6)
-        previous=f'?nav=Dashboard%20Kinerja&dk_week={week_offset-1}'
-        following=(f'<a class="dk70-week-arrow" href="?nav=Dashboard%20Kinerja&dk_week={week_offset+1}" target="_top" aria-label="Minggu berikutnya">›</a>' if week_offset<0
+        previous=f'/?nav=Dashboard%20Kinerja&dk_week={week_offset-1}'
+        following=(f'<a class="dk70-week-arrow" href="/?nav=Dashboard%20Kinerja&dk_week={week_offset+1}" target="_top" aria-label="Minggu berikutnya">›</a>' if week_offset<0
                    else '<span class="dk70-week-arrow is-disabled" aria-label="Minggu ini">›</span>')
         short=f'{start.day} {MONTHS_ID[start.month-1][:3]} {start.year} – {end.day} {MONTHS_ID[end.month-1][:3]} {end.year}'
         st.markdown('<div class="dk70-week-nav">'
@@ -6387,12 +6387,12 @@ if nav == 'Beranda':
     <div class='home-shell'>
       <div class='home-hero'><div class='hero-copy'><h1 class='hero-title'>PERFORMANCE MONITORING &amp; REPORTING</h1><p class='hero-subtitle'>Platform untuk mendukung kegiatan keselamatan kerja dan pengelolaan laporan secara efisien.</p><div class='hero-identity'><strong class='hero-station'>{home_station}</strong><span class='hero-user'>{home_user}</span>{home_nipp_line}</div></div></div>
       <div class='home-grid'>
-        <a class='home-card-shell book-card' href='?nav=Buku%20Kerja' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Buku Kerja</div><div class='home-card-copy'>Input kegiatan, petugas, TTD, dokumentasi, riwayat, dan PDF.</div></div></a>
-        <a class='home-card-shell monitor-card' href='?nav=Dashboard%20Kinerja' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Dashboard Kinerja</div><div class='home-card-copy'>Rekap minggu, bulan, tahun, dan capaian target tiap petugas.</div></div></a>
-        <a class='home-card-shell dsafe-card' href='?nav=D-Safe' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>D-Safe</div><div class='home-card-copy'>Generator laporan D-Safe.</div></div></a>
-        <a class='home-card-shell safety-card' href='?nav=Safety%20Talk' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Safety Talk Mingguan</div><div class='home-card-copy'>Generator laporan Safety Talk.</div></div></a>
+        <a class='home-card-shell book-card' href='/?nav=Buku%20Kerja' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Buku Kerja</div><div class='home-card-copy'>Input kegiatan, petugas, TTD, dokumentasi, riwayat, dan PDF.</div></div></a>
+        <a class='home-card-shell monitor-card' href='/?nav=Dashboard%20Kinerja' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Dashboard Kinerja</div><div class='home-card-copy'>Rekap minggu, bulan, tahun, dan capaian target tiap petugas.</div></div></a>
+        <a class='home-card-shell dsafe-card' href='/?nav=D-Safe' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>D-Safe</div><div class='home-card-copy'>Generator laporan D-Safe.</div></div></a>
+        <a class='home-card-shell safety-card' href='/?nav=Safety%20Talk' target='_top'><div class='home-card-image'></div><div class='home-card-body'><div class='home-card-title'>Safety Talk Mingguan</div><div class='home-card-copy'>Generator laporan Safety Talk.</div></div></a>
       </div>
-      <a class='settings-float' href='?nav=Pengaturan' target='_top' aria-label='Pengaturan'>⚙</a>
+      <a class='settings-float' href='/?nav=Pengaturan' target='_top' aria-label='Pengaturan'>⚙</a>
     </div>
     <div class='home-footer'><div class='kai-brand'><span class='kai-logo'><span class='kai-k'>K</span><span class='kai-a'>A</span><span class='kai-i'>I</span></span><span>PT. Kereta Api Indonesia (Persero)</span></div><div class='footer-tag'>Safe Today&nbsp;&nbsp;|&nbsp;&nbsp;Better Tomorrow</div></div>
     """, unsafe_allow_html=True)
