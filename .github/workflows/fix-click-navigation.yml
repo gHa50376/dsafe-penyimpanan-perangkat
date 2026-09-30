@@ -1,0 +1,132 @@
+name: Fix D-Safe Click Navigation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/fix-click-navigation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-click-navigation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install online click navigation bridge
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("browser_storage.js")
+          text = path.read_text(encoding="utf-8")
+
+          marker = "// DSAFE_NAVIGATION_BRIDGE_V1"
+
+          if marker in text:
+              print("Navigation bridge already installed.")
+              raise SystemExit(0)
+
+          needle = "export default function({data,parentElement,setStateValue}){"
+
+          if text.count(needle) != 1:
+              raise SystemExit(
+                  "Safety check failed: browser_storage.js structure is unexpected."
+              )
+
+          bridge = r'''
+          // DSAFE_NAVIGATION_BRIDGE_V1
+          // Streamlit Community Cloud: force the existing HTML navigation
+          // controls to navigate on the top-level application page.
+          function installDsafeNavigationBridge(){
+            const stateKey = Symbol.for('dsafe.v364113.navigation-bridge');
+
+            if(globalThis[stateKey]) return;
+            globalThis[stateKey] = true;
+
+            const selector = [
+              'a.home-card-shell',
+              'a.settings-float',
+              'a.bk-hist-action-btn',
+              'a.dk70-week-arrow'
+            ].join(',');
+
+            const handleNavigation = (event) => {
+              let anchor = null;
+
+              if(typeof event.composedPath === 'function'){
+                for(const node of event.composedPath()){
+                  if(
+                    node &&
+                    typeof node.matches === 'function' &&
+                    node.matches(selector)
+                  ){
+                    anchor = node;
+                    break;
+                  }
+                }
+              }
+
+              if(
+                !anchor &&
+                event.target &&
+                typeof event.target.closest === 'function'
+              ){
+                anchor = event.target.closest(selector);
+              }
+
+              if(!anchor) return;
+
+              const href = anchor.getAttribute('href');
+
+              if(!href || !href.includes('nav=')) return;
+
+              event.preventDefault();
+              event.stopPropagation();
+
+              if(typeof event.stopImmediatePropagation === 'function'){
+                event.stopImmediatePropagation();
+              }
+
+              const destination = new URL(href, globalThis.location.href);
+
+              globalThis.location.assign(destination.href);
+            };
+
+            document.addEventListener('click', handleNavigation, true);
+          }
+
+          installDsafeNavigationBridge();
+
+          '''
+
+          text = text.replace(needle, bridge + needle, 1)
+          path.write_text(text, encoding="utf-8")
+
+          print("Online click navigation bridge installed.")
+          PY
+
+      - name: Commit click navigation fix
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add browser_storage.js
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Fix D-Safe online card clicks"
+          git push
